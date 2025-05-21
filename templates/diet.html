@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart-Healthy Diet | Heart Disease Prevention</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e40af;
+            --primary-light: #3b82f6;
+            --secondary: #475569;
+            --background: #f8fafc;
+            --white: #ffffff;
+            --accent: #f97316;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #f0f9ff, var(--white));
+            color: var(--secondary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-light);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 6rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .back-home {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--white);
+            color: var(--primary);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .back-home:hover {
+            background-color: var(--primary);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+            overflow: hidden;
+        }
+
+        .section-header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem;
+        }
+
+        .section-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        .section-body {
+            padding: 2rem;
+        }
+
+        .key-facts {
+            margin: 2rem 0;
+        }
+
+        .fact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .fact-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .fact-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .fact-content h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Image Slider */
+        .slider-container {
+            position: relative;
+            max-width: 100%;
+            margin: 2rem 0;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            transition: opacity 0.5s;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .slide-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0));
+            color: white;
+            padding: 1.5rem;
+        }
+
+        .slide-content h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .slider-dot.active {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.7);
+            color: var(--primary);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .slider-btn:hover {
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .prev-btn {
+            left: 15px;
+        }
+
+        .next-btn {
+            right: 15px;
+        }
+
+        /* Video Section */
+        .video-container {
+            margin: 2rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-responsive {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-responsive iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Tabs */
+        .tabs {
+            margin: 2rem 0;
+        }
+
+        .tab-buttons {
+            display: flex;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 1.5rem;
+        }
+
+        .tab-btn {
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-weight: 600;
+            color: var(--secondary);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Survey and Research */
+        .research-card {
+            background: #f8fafc;
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .research-source {
+            font-style: italic;
+            color: var(--secondary);
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: var(--white);
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #e2e8f0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .fact-item {
+                flex-direction: column;
+            }
+
+            .fact-icon {
+                margin-bottom: 1rem;
+            }
+
+            .slider-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 1rem;
+            }
+
+            .tab-buttons {
+                overflow-x: auto;
+                white-space: nowrap;
+                padding-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+   
+
+    <section class="hero">
+        <div class="container">
+            <h1>Heart-Healthy Diet</h1>
+            <p class="hero-subtitle">Discover how the foods you eat can significantly impact your heart health and reduce your risk of cardiovascular disease.</p>
+            <a href="prevation.html" class="back-home">
+                <i class='bx bx-arrow-back'></i> Back to Home
+            </a>
+        </div>
+    </section>
+
+    <main class="container">
+        <section id="key-info" class="content-section">
+            <div class="section-header">
+                <h2>Key Information About Heart-Healthy Diet</h2>
+            </div>
+            <div class="section-body">
+                <p>A heart-healthy diet emphasizes a variety of fruits and vegetables, whole grains, lean proteins, and limits unhealthy fats, sodium, and added sugars. Research has consistently shown that dietary choices play a crucial role in preventing heart disease, which remains the leading cause of death worldwide.</p>
+                
+                <div class="key-facts">
+                    <div class="fact-item">
+                        <i class='bx bx-check-circle fact-icon'></i>
+                        <div class="fact-content">
+                            <h3>Reduce Saturated and Trans Fats</h3>
+                            <p>Consuming too much saturated and trans fats can raise blood cholesterol levels and increase your risk of heart disease. Limit intake of red meat, full-fat dairy products, and processed foods containing partially hydrogenated oils.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="fact-item">
+                        <i class='bx bx-check-circle fact-icon'></i>
+                        <div class="fact-content">
+                            <h3>Increase Fiber Intake</h3>
+                            <p>Soluble fiber found in oats, beans, fruits, and vegetables helps lower LDL (bad) cholesterol. A diet rich in fiber can reduce the risk of heart disease by up to 30%, according to large-scale studies.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="fact-item">
+                        <i class='bx bx-check-circle fact-icon'></i>
+                        <div class="fact-content">
+                            <h3>Limit Sodium</h3>
+                            <p>High sodium intake is linked to increased blood pressure, a major risk factor for heart disease. The American Heart Association recommends limiting sodium to less than 2,300 mg per day, with an ideal limit of 1,500 mg for most adults.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="slider-container">
+                    <div class="slider">
+                        <div class="slide">
+                            <img src="https://images.pexels.com/photos/3872370/pexels-photo-3872370.jpeg" alt="Mediterranean Diet">
+                            <div class="slide-content">
+                                <h3>Mediterranean Diet</h3>
+                                <p>Emphasizes fruits, vegetables, whole grains, beans, nuts, and olive oil. Research shows it can reduce heart disease risk by up to 30%.</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="https://images.pexels.com/photos/1002543/pexels-photo-1002543.jpeg" alt="DASH Diet">
+                            <div class="slide-content">
+                                <h3>DASH Diet</h3>
+                                <p>Designed to help lower blood pressure through a diet rich in fruits, vegetables, whole grains, and low-fat dairy products.</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="https://images.pexels.com/photos/4144234/pexels-photo-4144234.jpeg" alt="Heart-Healthy Fats">
+                            <div class="slide-content">
+                                <h3>Heart-Healthy Fats</h3>
+                                <p>Fatty fish, avocados, nuts, and olive oil contain unsaturated fats that can help reduce inflammation and lower heart disease risk.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="slider-btn prev-btn"><i class='bx bx-chevron-left'></i></button>
+                    <button class="slider-btn next-btn"><i class='bx bx-chevron-right'></i></button>
+                    <div class="slider-nav">
+                        <div class="slider-dot active"></div>
+                        <div class="slider-dot"></div>
+                        <div class="slider-dot"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="section-header">
+                <h2>Expert Video Guidance</h2>
+            </div>
+            <div class="section-body">
+                <p>Watch this informative video from the American Heart Association about making heart-healthy food choices:</p>
+                <div class="video-container">
+                    <div class="video-responsive">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/DI9N_bJB8Tw" title="Heart-Healthy Eating" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <p>Understanding the basics of nutrition and how different foods affect your heart can help you make better dietary choices. The video above provides practical tips and scientific insights to guide your heart-healthy eating plan.</p>
+            </div>
+        </section>
+
+        <section id="recommendations" class="content-section">
+            <div class="section-header">
+                <h2>Practical Recommendations</h2>
+            </div>
+            <div class="section-body">
+                <div class="tabs">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" data-tab="daily-choices">Daily Choices</button>
+                        <button class="tab-btn" data-tab="meal-planning">Meal Planning</button>
+                        <button class="tab-btn" data-tab="reading-labels">Reading Labels</button>
+                    </div>
+                    
+                    <div id="daily-choices" class="tab-content active">
+                        <h3>Make Heart-Healthy Daily Choices</h3>
+                        <ul>
+                            <li>Eat at least 4-5 servings of fruits and vegetables daily</li>
+                            <li>Choose whole grain products (brown rice, whole wheat bread, oatmeal)</li>
+                            <li>Include lean proteins like fish, skinless poultry, beans, and legumes</li>
+                            <li>Limit red meat to once or twice a week</li>
+                            <li>Choose low-fat or fat-free dairy products</li>
+                            <li>Use liquid vegetable oils instead of solid fats for cooking</li>
+                            <li>Limit processed foods high in sodium, added sugars, and unhealthy fats</li>
+                            <li>Stay hydrated with water instead of sugary beverages</li>
+                        </ul>
+                    </div>
+                    
+                    <div id="meal-planning" class="tab-content">
+                        <h3>Heart-Healthy Meal Planning</h3>
+                        <p>Planning your meals in advance can help you maintain a heart-healthy diet:</p>
+                        <ol>
+                            <li><strong>Make half your plate fruits and vegetables</strong> - Aim for a variety of colors to get diverse nutrients</li>
+                            <li><strong>Add whole grains</strong> - Make at least half your grains whole grains</li>
+                            <li><strong>Include lean protein</strong> - Fish, poultry without skin, beans, and nuts are great choices</li>
+                            <li><strong>Limit portion sizes</strong> - Even healthy foods can contribute to weight gain when consumed in large amounts</li>
+                            <li><strong>Meal prep on weekends</strong> - Having healthy meals ready reduces the temptation to grab fast food</li>
+                        </ol>
+                    </div>
+                    
+                    <div id="reading-labels" class="tab-content">
+                        <h3>How to Read Nutrition Labels</h3>
+                        <p>Understanding nutrition labels is crucial for making heart-healthy choices:</p>
+                        <ul>
+                            <li><strong>Check serving sizes</strong> - All nutrition information is based on one serving</li>
+                            <li><strong>Look for saturated and trans fats</strong> - Aim for products with 0g trans fat and low saturated fat</li>
+                            <li><strong>Check sodium content</strong> - Choose foods with less than 140mg of sodium per serving</li>
+                            <li><strong>Fiber content</strong> - Look for products with at least 3g of fiber per serving</li>
+                            <li><strong>Added sugars</strong> - Limit foods with added sugars in the first few ingredients</li>
+                            <li><strong>Ingredient list</strong> - Choose products with fewer ingredients and recognizable foods</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="research" class="content-section">
+            <div class="section-header">
+                <h2>Research and Evidence</h2>
+            </div>
+            <div class="section-body">
+                <p>Numerous scientific studies have demonstrated the impact of diet on heart health. Here are some key findings from reputable sources:</p>
+                
+                <div class="research-card">
+                    <h3>Mediterranean Diet and Cardiovascular Risk</h3>
+                    <p>A landmark study published in the New England Journal of Medicine found that participants following a Mediterranean diet supplemented with extra-virgin olive oil or nuts experienced a 30% reduction in major cardiovascular events compared to those on a low-fat diet.</p>
+                    <p class="research-source">Source: Estruch R, et al. Primary Prevention of Cardiovascular Disease with a Mediterranean Diet. New England Journal of Medicine, 2013.</p>
+                </div>
+                
+                <div class="research-card">
+                    <h3>DASH Diet and Blood Pressure</h3>
+                    <p>The Dietary Approaches to Stop Hypertension (DASH) trial demonstrated that a diet rich in fruits, vegetables, and low-fat dairy products, and low in saturated fat, total fat, and cholesterol, significantly lowered blood pressure in individuals with and without hypertension.</p>
+                    <p class="research-source">Source: Appel LJ, et al. A Clinical Trial of the Effects of Dietary Patterns on Blood Pressure. New England Journal of Medicine, 1997.</p>
+                </div>
+                
+                <div class="research-card">
+                    <h3>American Heart Association Survey Findings</h3>
+                    <p>According to a 2019 survey conducted by the American Heart Association, while 80% of Americans report being concerned about their heart health, only about 30% consistently make dietary choices that align with heart-healthy guidelines. This disconnect highlights the need for continued education and practical strategies to help people translate knowledge into action.</p>
+                    <p class="research-source">Source: American Heart Association Heart Disease and Stroke Statistics, 2019.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>About HeartHealth</h4>
+                    <p>Dedicated to promoting heart health and preventing cardiovascular disease through education and awareness.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="physical-activity.html">Physical Activity</a></li>
+                        <li><a href="blood-pressure.html">Blood Pressure</a></li>
+                        <li><a href="stress-management.html">Stress Management</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul class="footer-links">
+                        <li><i class='bx bx-phone'></i> (123) 456-7890</li>
+                        <li><i class='bx bx-envelope'></i> info@hearthealth.org</li>
+                        <li><i class='bx bx-map'></i> 123 Health Street, Medical District</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 HeartHealth. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Slider functionality
+        const slider = document.querySelector('.slider');
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        let currentSlide = 0;
+        const slideCount = slides.length;
+        
+        function goToSlide(index) {
+            if (index < 0) index = slideCount - 1;
+            if (index >= slideCount) index = 0;
+            
+            slider.style.transform = `translateX(-${index * 100}%)`;
+            currentSlide = index;
+            
+            // Update dots
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
+        }
+        
+        // Set up event listeners
+        prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+        nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+        
+        dots.forEach((dot, i) => {
+            dot.addEventListener('click', () => goToSlide(i));
+        });
+        
+        // Auto-advance slides
+        let slideInterval = setInterval(() => {
+            goToSlide(currentSlide + 1);
+        }, 5000);
+        
+        // Pause auto-advance on hover
+        slider.addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+        });
+        
+        slider.addEventListener('mouseleave', () => {
+            slideInterval = setInterval(() => {
+                goToSlide(currentSlide + 1);
+            }, 5000);
+        });
+        
+        // Tab functionality
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabId = btn.getAttribute('data-tab');
+                
+                // Update active button
+                tabBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Show active content
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                    if (content.id === tabId) {
+                        content.classList.add('active');
+                    }
+                });
+            });
+        });
+        
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

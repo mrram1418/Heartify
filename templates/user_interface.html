@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Prediction</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: url("human-heart-design.jpg") no-repeat center center/cover;
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
+        }
+
+        .container {
+            padding: 40px;
+            
+            border-radius: 20px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: scroll;
+            background-color: rgba(255, 255, 255, 0.1); /* white with 10% opacity */
+    backdrop-filter: blur(2px);
+-webkit-backdrop-filter: blur(2px); /* for Safari support */
+
+            transition: transform 0.3s;
+        }
+
+        .container:hover {
+            transform: scale(1.02);
+        }
+
+        h2 {
+            color: #ff8c42;
+            margin-bottom: 20px;
+            font-size: 30px;
+            font-weight: 700;
+            margin-left: 18vw;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 500px;
+            margin: 15px 0;
+            padding: 12px 18px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(3px);
+        }
+
+        label {
+            font-weight: 600;
+            color: black;
+            flex: 1;
+            text-align: left;
+        }
+
+        .radio-group {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            width: 100%;
+        }
+.form-group{
+    width: 100%;
+}
+        input[type="number"] {
+            border: none;
+            border-bottom: 2px solid #0b0b0b;
+            background-color: transparent;
+            color: #fff;
+            padding: 8px;
+            font-size: 14px;
+            width: 100%;
+        }
+
+        input[type="number"]:focus {
+            border-bottom-color: #f06543;
+            outline: none;
+            box-shadow: none;
+        }
+
+        input[type="radio"] {
+            padding: 8px;
+            border: 2px solid #ff8c42;
+            border-radius: 8px;
+            outline: none;
+            background-color: #dedbdb;
+            color: #fff;
+            transition: border-color 0.3s;
+            font-size: 14px;
+        }
+
+        input[type="radio"]:focus {
+            border-color: #f06543;
+            box-shadow: 0px 0px 8px rgba(255, 140, 66, 0.5);
+        }
+
+        button {
+            margin-top: 25px;
+            padding: 12px 30px;
+            font-size: 16px;
+            background-color: #ff8c42;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            font-weight: 600;
+        }
+
+        button:hover {
+            background-color: #f06543;
+            transform: translateY(-3px);
+        }
+
+        .result-box {
+            margin-top: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 85%;
+                padding: 20px;
+            }
+
+            .form-group {
+                max-width: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Heart Disease Prediction</h2>
+        <form id="predictionForm">
+            <!-- All your form groups here as-is -->
+            <!-- Skipping repeated form group HTML for brevity -->
+            <div class="form-group">
+                <label>High Blood Pressure:</label>
+                <div class="radio-group">
+                    <input type="radio" name="HighBP" value="1" required> Yes
+                    <input type="radio" name="HighBP" value="0" required> No
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>High Cholesterol:</label>
+                <div class="radio-group">
+                    <input type="radio" name="HighChol" value="1" required> Yes
+                    <input type="radio" name="HighChol" value="0" required> No
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Cholesterol Check:</label>
+                <div class="radio-group">
+                    <input type="radio" name="CholCheck" value="1" required> Yes
+                    <input type="radio" name="CholCheck" value="0" required> No
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>BMI:</label>
+                <input type="number" name="BMI" step="0.1" required>
+            </div>
+
+            <div class="form-group">
+                <label>Smoker:</label>
+                <div class="radio-group">
+                    <input type="radio" name="Smoker" value="1" required> Yes
+                    <input type="radio" name="Smoker" value="0" required> No
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Stroke:</label>
+                <div class="radio-group">
+                    <input type="radio" name="Stroke" value="1" required> Yes
+                    <input type="radio" name="Stroke" value="0" required> No
+                </div>
+            </div>
+                   
+            <div class="form-group">
+                <label>Diabetes:</label>
+                <div class="radio-group">
+                    <input type="radio" name="Diabetes" value="1" required> Yes
+                    <input type="radio" name="Diabetes" value="0" required> No
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Physical Activity:</label>
+                <div class="radio-group">
+                    <input type="radio" name="PhysActivity" value="1" required> Yes
+                    <input type="radio" name="PhysActivity" value="0" required> No
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Fruits Intake:</label>
+                <div class="radio-group">
+                    <input type="radio" name="Fruits" value="1" required> Yes
+                    <input type="radio" name="Fruits" value="0" required> No
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Veggies Intake:</label>
+                <div class="radio-group">
+                    <input type="radio" name="Veggies" value="1" required> Yes
+                    <input type="radio" name="Veggies" value="0" required> No
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Heavy Alcohol Consumption:</label>
+                <div class="radio-group">
+                    <input type="radio" name="HvyAlcoholConsump" value="1" required> Yes
+                    <input type="radio" name="HvyAlcoholConsump" value="0" required> No
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Age Category (1-13):</label>
+                <input type="number" name="Age" min="1" max="13" required>
+            </div>
+            
+            <div class="form-group">
+             <label>Any Healthcare:</label>
+                <div class="radio-group">
+                    <input type="radio" name="AnyHealthcare" value="1" required> Yes
+                    <input type="radio" name="AnyHealthcare" value="0" required> No
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>No Doctor Because of Cost:</label>
+                <div class="radio-group">
+                    <input type="radio" name="NoDocbcCost" value="1" required> Yes
+                    <input type="radio" name="NoDocbcCost" value="0" required> No
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>General Health (1-5):</label>
+                <input type="number" name="GenHlth" min="1" max="5" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Mental Health (Days in Poor Mental Health):</label>
+                <input type="number" name="MentHlth" min="0" max="30" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Physical Health (Days in Poor Physical Health):</label>
+                <input type="number" name="PhysHlth" min="0" max="30" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Difficulty Walking:</label>
+                <div class="radio-group">
+                    <input type="radio" name="DiffWalk" value="1" required> Yes
+                    <input type="radio" name="DiffWalk" value="0" required> No
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Sex:</label>
+                <div class="radio-group">
+                    <input type="radio" name="Sex" value="1" required> Male
+                    <input type="radio" name="Sex" value="0" required> Female
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Education Level (1-6):</label>
+                <input type="number" name="Education" min="1" max="6" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Income Level (1-8):</label>
+                <input type="number" name="Income" min="1" max="8" required>
+            </div>
+            <button type="submit">Predict</button>
+        </form>
+        <div class="result-box">Prediction Result: <span id="result"></span></div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#predictionForm").submit(function(event) {
+                event.preventDefault();
+                let formData = $(this).serializeArray();
+                let formValues = {};
+                formData.forEach(item => {
+                    formValues[item.name] = item.value;
+                });
+                console.log("\ud83d\udccc Submitted Data:", formValues);
+                $.ajax({
+                    url: "/",
+                    type: "POST",
+                    data: $(this).serialize(),
+                    dataType: "json",
+                    headers: { "X-Requested-With": "XMLHttpRequest" },
+                    success: function(response) {
+                        console.log("\u2705 Prediction Result:", response.result);
+                        $("#result").text(response.result);
+                    },
+                    error: function(xhr) {
+                        console.error("\u274c Error:", xhr.responseText);
+                        $("#result").text("Error: " + xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
